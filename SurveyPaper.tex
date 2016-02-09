@@ -102,6 +102,10 @@
 \usepackage{graphics}
 \usepackage{latexsym}
 
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+
 \newenvironment{changemargin}[2]{%
  \begin{list}{}{%
    \setlength{\topsep}{0pt}%
@@ -432,16 +436,33 @@ If the network instead learns a \emph{tree-augmented} na\"{i}ve structure, in wh
 \label{classification}
 This section classifies or ``taxonomizes'' AI/ML approaches based on the needs of adaptive DRE systems as outlined in section ~\ref{taxonomy} as outlined in Figure~\ref{Fig:ClassTable}. In particular, each AI approach surveyed is classified on the 4 properties needed for adaptive DRE systems, namely (1) supporting a distributed environment, (2) supporting real-time requirements, (3) supporting an embedded environment, and (4) incorporating new data into the approach as it becomes available while the system is running.
 
-\begin{figure*}[t]
+\begin{table*} % TODO: Make the font green for a checkmark and red for an X.
+	\large
+	\caption{Summary of AI/ML Techniques}
 	\centering
+	\begin{tabular}{c|c|c|c|c|c}
+	AI/ML Method              & Distributed & Real-Time & Embedded & Robust & Autodidactic \\ % TODO: Make sure the table is actually correct.
+	\hline
+	Artificial Neural Network & \cmark      & \cmark    & \cmark   & \cmark & \xmark \\
+	Bayesian Network          & \cmark      & \xmark    & \xmark   & \xmark & \cmark \\
+	Expert System             & \cmark      & \xmark    & \cmark   & \xmark & \cmark \\
+	Decision Tree             & \cmark      & \xmark    & \cmark   & \xmark & \xmark \\
+	Random Forest             & \cmark      & \xmark    & \cmark   & \xmark & \xmark \\
+	Support Vector Machine    & \cmark      & \cmark    & \cmark   & \cmark & \xmark
+	\end{tabular}
+	\label{summary_table}
+\end{table*}
+
+%\begin{figure*}[t]
+%	\centering
 %\epsfig{file=Table.jpg, height=3in, width=5.5in} -- ACM
 %\includegraphics{Table.jpg, height=1in, width=1in}
-\includegraphics[height=3in, width=5.5in]{Table.jpg}
+%\includegraphics[height=3in, width=5.5in]{Table.jpg}
 %	\includegraphics{ClassificationTable.pdf}
 %        \vspace{-0.1in}
-	\caption{\bf Classification Table}
-	\label{Fig:ClassTable}
-\end{figure*}
+%	\caption{\bf Classification Table}
+%	\label{Fig:ClassTable}
+%\end{figure*}
 
 $\bullet$ {\bf Artificial Neural Networks.}
 An ANN is generally a  good fit for an adaptive DRE system, but it suffers from difficulty with learning over time.
