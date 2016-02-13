@@ -407,6 +407,11 @@ This  structure can then be used to infer the most likely state of any given nod
 
 %In general, each node has an associated probability table that lists the probability of each of its possible values given every possible combination of its causes' values. If memory resources are scarce, the probability of the last possible value  can be omitted since it can be calculated. For example, in the network shown in Figure~\ref{Fig:BayesianNet}, where each variable can be  either true or false, node \emph{C}'s probability table contains four  rows, with the understanding that the four probabilities that \emph{C} is false are easily calculable from the probabilities that \emph{C} is true. Likewise, node \emph{D}'s probability table is also listed based on the value of node \emph{C}.
 
+%One key concept of Bayesian networks is that of blocking nodes --- nodes that, when their values are known, make the values of certain other nodes independent of each other. For instance, in Figure~\ref{Fig:BayesianNet}, the value of \emph{D} is influenced by \emph{C} and therefore by \emph{A} and \emph{B}, unless the value of \emph{C} is already known. In that case, \emph{D} becomes independent of \emph{A} and \emph{B} because \emph{C} blocks the paths from \emph{A} to \emph{D} and from \emph{B} to \emph{D}. Knowledge of the conditional independences between nodes can simplify the algorithms that work with a given Bayesian network and improve their performance by pointing out which nodes can be ignored.
+
+%This structure can then be used to infer the state of any given node given the states of any or all of the other nodes in the network. One key concept of Bayesian networks is that of blocking nodes --- nodes that, when their values are known, make the values of certain other nodes independent of each other. For instance, in the example with A $\rightarrow$ B $\leftarrow$ C, the value of A is influenced by B and therefore by C, unless the value of B is already known. In that case, A becomes independent of C because B blocks the path from C to A.
+%Knowledge of the conditional independencies between nodes can simplify the algorithms that work with a given Bayesian network and improve their performance by pointing out which nodes can be ignored.
+
 \begin{figure}[t]
 	\centering
 	\includegraphics[height=1.5in, width=2.5in]{BayesianNetwork.png}
@@ -417,12 +422,7 @@ This  structure can then be used to infer the most likely state of any given nod
 	\caption{\bf Bayesian Network Example}
 	\label{Fig:BayesianNet}
 \end{figure}
-\vspace{-0.3in}
-
-%One key concept of Bayesian networks is that of blocking nodes --- nodes that, when their values are known, make the values of certain other nodes independent of each other. For instance, in Figure~\ref{Fig:BayesianNet}, the value of \emph{D} is influenced by \emph{C} and therefore by \emph{A} and \emph{B}, unless the value of \emph{C} is already known. In that case, \emph{D} becomes independent of \emph{A} and \emph{B} because \emph{C} blocks the paths from \emph{A} to \emph{D} and from \emph{B} to \emph{D}. Knowledge of the conditional independences between nodes can simplify the algorithms that work with a given Bayesian network and improve their performance by pointing out which nodes can be ignored.
-
-%This structure can then be used to infer the state of any given node given the states of any or all of the other nodes in the network. One key concept of Bayesian networks is that of blocking nodes --- nodes that, when their values are known, make the values of certain other nodes independent of each other. For instance, in the example with A $\rightarrow$ B $\leftarrow$ C, the value of A is influenced by B and therefore by C, unless the value of B is already known. In that case, A becomes independent of C because B blocks the path from C to A.
-%Knowledge of the conditional independencies between nodes can simplify the algorithms that work with a given Bayesian network and improve their performance by pointing out which nodes can be ignored.
+%\vspace{-0.3in}
 
 Because it is generally easier for a Bayesian Network to learn the appropriate values for its probability tables than to learn the network topology, it is common to assume some canonical network structure when learning Bayesian Networks from data, such as the particularly common \emph{na\"{i}ve Bayes}~\cite{Darwiche:10}. In a na\"{i}ve Bayesian Network, there is one node \emph{C}, typically referred to as the class variable, and one or more nodes \emph{A$_{i}$}, referred to as attributes, such that \emph{C} $\rightarrow$ \emph{A$_{i}$}. This structure, and the slightly more complex \emph{tree-augmented na\"{i}ve Bayes}, perform surprisingly well for classification problems in general.~\cite{Friedman:97}\cite{Quinlan:93}
 
@@ -501,6 +501,7 @@ The general definition of a Bayesian Network offers few guarantees about its tim
 %satisfies the timeliness requirement of a real-time system by being
 can be bounded by the number of nodes in the network, the number of possible states for each node, and the number of connections between them.
 % Jeremy, I tweaked this sentence below. Please make sure it makes sense to you.
+% Dr. Hoffert, it makes sense, although I thought the bounded time was implied by the rest of the sentence. If it makes the sentence clearer, let's keep it.
 An explicit bounded-time mathematical formula calculates any probability in the network, using each possible state of a node and each connection no more than once.
 %The fact that the network is acyclic guarantees that no edge can be used more than once and that probabilities for each node's values do not need to be recalculated during the same invocation (\emph{i.e.}, a node cannot be a direct or indirect cause of itself, so it cannot affect its own probabilities). Some invocations might require fewer calculations because of conditional independence, but never more.
 	
@@ -517,14 +518,13 @@ and each connection holds a frequency for each combination of the states of its 
 %, denoted \emph{Fr}(\emph{x}, \emph{y})
 %Then, after as many nodes' actual values as possible are measured following a prediction, all of the network's probabilities can be recomputed as if making another prediction in order to incorporate the known information.
 Increasing each frequency
-by the associated event's new probability after measuring
+by the associated event's new probability of having just happened (1 or 0 if the node's current state is known)
 % Jeremy, should ``measuring'' above be changed to something like ``feedback/new input''?
+% Dr. Hoffert, how's this? It's supposed to be specifically the probability that the event \emph{has just happened}, not that it \emph{will} the next time. It's more accurate because it incorporates some or all information about what actually happened.
 %\emph{Fr}(\emph{x}) by \emph{Pr}(\emph{x}) and each \emph{Fr}(\emph{x}, \emph{y}) by \emph{Pr}(\emph{x} $|$ \emph{y}) $\cdot$ {Pr}(\emph{y})
-will move the initial probability of every state of a node toward its new probability. The proof is fairly simple but beyond the scope of this paper. Learning thus runs in bounded time, is deterministic, and needs no human intervention.
+will move the initial probability of every state of a node toward that new probability. The proof is fairly simple but beyond the scope of this paper. Learning thus runs in bounded time, is deterministic, and needs no human intervention.
 
 %\textbf{\emph{I'll need to think about how this learning technique could be used in a network where C isn't the direct cause of everything, like A $\leftarrow$ C $\rightarrow$ B $\rightarrow$ D. How would the frequencies for D change after finding out whether C is right or wrong? My first thought is that whether B is right or wrong would also have to be determined, but can that always, or ever, be done? And then how would B's frequencies change: based on the accuracy of C or on the accuracy of B? For now, all I know for sure is that this technique should work for any na\"{i}ve Bayesian network.}}
-%
-%\textbf{\emph{Jeremy, we'll table my comment above for now. We can address it in a different venue later.}}
 
 %	The time required for learning at run-time is thus bounded by the number of nodes, the number of connections between the nodes, and the number of possible values for each node, all of which are known \emph{a priori}. A Bayesian network's learning as well as its predictions can fit the requirements of a DRE system in that this means of learning over time is deterministic (given a consistent means of determining whether a prediction was correct), operates in bounded time, and requires no human intervention.
 
@@ -617,7 +617,7 @@ There are AI techniques that meet all but one of the 5 adaptive DRE properties a
 
 \section{Concluding Remarks}
 \label{summary}
-DRE systems are being used for control in many important domains (\emph{e.g.}, power grid, shipboard computing environments, manufacturing). Historically, these systems have been analyzed a priori to provide for provisioning resources and determining behavior. However, these systems can benefit from adaptation to leverage resources more appropriately and to respond to environments or situations not encountered previously. Artificial intelligence approaches can be used to enable this type of adaptation.
+DRE systems are being used for control in many important domains (\emph{e.g.}, power grid, shipboard computing environments, manufacturing). Historically, these systems have been analyzed \emph{a priori} to provide for provisioning resources and determining behavior. However, these systems can benefit from adaptation to leverage resources more appropriately and to respond to environments or situations not encountered previously. Artificial intelligence approaches can be used to enable this type of adaptation.
 
 Many AI approaches have been developed over the years. Some of these approaches are more amenable than others relative to the properties and requirements of DRE systems. The work outlined in this paper has furthered this research in the following ways. The properties of DRE systems relative to adaptation have been clearly enumerated and defined. Several AI approaches have been summarized and taxonomized using the enumerated properties. Gap analysis has been performed to show areas of further investigation and research.
 
