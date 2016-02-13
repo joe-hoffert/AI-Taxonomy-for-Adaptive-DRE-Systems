@@ -66,7 +66,7 @@
 %   number={9},
 %   pages={2584-2603},)
 %
-% AI/ML techniques from recent reported applications of Intelligent Decision Support Systems
+% AI techniques from recent reported applications of Intelligent Decision Support Systems
 % (From AI Tools in Decision Making Support Systems: A Review; Gloria Philipps-Wren, International
 %  Journal on Artificial Intelligence Tools, Vol. 21, No. 2, 2012)
 %
@@ -95,6 +95,11 @@
 \documentclass[conference]{IEEEtran}
 %\documentclass{sig-alternate}
 %\documentclass{acm_proc_article-sp}
+%\usepackage[showframe]{geometry}
+
+
+%\setlength{\voffset}{-0.5in}
+%\setlength{\headsep}{5pt}
 
 \pagenumbering{arabic}
 
@@ -122,7 +127,6 @@
 \hyphenation{op-tical net-works semi-conduc-tor}
 
 \begin{document}
-
 % --- Author Metadata here - SEEMS TO JUST BE FOR ACM AND NOT IEEE ---
 %\conferenceinfo{ACMSE'13,}{April 4-6, 201, Savannah, GA, USA}
 %\CopyrightYear{2013}
@@ -133,7 +137,7 @@
 % --- End of Author Metadata ---
 
 \title{\LARGE\bf 
-%\vspace{-0.25in}
+%\vspace{-0.5in}
 A Taxonomy of Artificial Intelligence Approaches for Adaptive Distributed Real-time Embedded Systems\thanks{This work is
 supported by Indiana Wesleyan University's Hinds Research Grant.}}
 %\vspace{-1in}
@@ -177,7 +181,7 @@ Email: jeremy.davis11004@myemail.indwes.edu, erik.vanlandingham@myemail.indwes.e
 \begin{abstract}
 Distributed real-time embedded (DRE) software systems such as are used to manage critical large-scale infrastructure are important systems to consider for increasing functionality and resiliency. DRE systems that can adapt to changes in the environment and/or changes in available resources are more robust to unexpected changes and extend both the systems' usefulness and lifespan. Artificial intelligence techniques are used for adaptation of software systems in general. However, they must meet certain requirements to be appropriate for use with DRE systems.
 
-Any artificial intelligence technique used in an adaptive DRE system should produce consistent results across a distributed system, operate in bounded time, make decisions autonomously, and gracefully handle and learn from previously unencountered environments. This paper surveys a variety of artificial intelligence/machine learning (AI/ML) techniques, providing a brief overview of each method, evaluating how each technique fits the requirements of an adaptive DRE system, and recognizing the gaps in each technique's ability to meet all of these requirements. Our results show that there is not one single AI technique that is a perfect fit for adaptive DRE systems, although some techniques address more of these requirements than others.
+Any artificial intelligence technique used in an adaptive DRE system should produce consistent results across a distributed system, operate in bounded time, make decisions autonomously, and gracefully handle and learn from previously unencountered environments. This paper surveys a variety of artificial intelligence (AI) techniques, providing a brief overview of each method, evaluating how each technique fits the requirements of an adaptive DRE system, and recognizing the gaps in each technique's ability to meet all of these requirements. Our results show that there is not one single AI technique that is a perfect fit for adaptive DRE systems, although some techniques address more of these requirements than others.
 
 %The growing prevalence of distributed real-time embedded systems in
 %applications such as emergency response, disaster recovery, and ambient assisted living
@@ -265,7 +269,7 @@ Ideally, when the learning approach is leveraging the new information as part of
 
 \end{enumerate}
 
-\section{AI/ML Approaches}
+\section{AI Approaches}
 \label{ml-approaches}
 
 This section provides a brief overview of various artificial intelligence approaches considered. This section highlights distinguishing aspects of each approach.
@@ -390,12 +394,12 @@ general, each layer produces input for the neurons in the next layer, although s
 networks' structures (called recurrent)~\cite{Philips-Wren:12} send some output from one layer to an earlier layer or to nodes
 in the same layer.
 
-$\bullet$ {\bf Bayesian Networks.} A Bayesian network is a structured representation of the attributes of a system and their interconnected probabilities which represent the system as a coherent whole~\cite{Darwiche:10}.
+$\bullet$ {\bf Bayesian Networks.} A Bayesian Network (BN) is a structured representation of the attributes of a system and their interconnected probabilities which represent the system as a coherent whole~\cite{Darwiche:10}.
 %A Bayesian network is a way of structuring
 %probabilistic information about a situation into a coherent whole.~\cite{Darwiche:10}
 The network establishes this structure by linking its nodes together in a directed acyclic graph of causal relationships, where for nodes \emph{A} and \emph{B}, \emph{A} $\rightarrow$ \emph{B} means, roughly, that the value of node \emph{A} is one cause of the value of node \emph{B}.
 %(Technically, the direction of causality is not always important because of the nature of probabilities. Knowing that the effect happened makes it more likely that the cause also happened, just as knowing that the cause happened makes the effect more likely.)
-This  structure can then be used to infer the most likely state of any given node given the state of any or all of the other  nodes in the network. For instance, if \emph{A} represents contact  with a diseased person and \emph{B} represents contraction of the  disease, \emph{A} causes \emph{B}, and there is some probability, written as \emph{Pr}(\emph{B} $|$ \emph{A}), that, given that \emph{A} occurs, \emph{B} also occurs. This probability is stored in the Bayesian network in the data structure for node \emph{B}, and the probability of \emph{A} occurring in the first place, \emph{Pr}(\emph{A}), is stored in node \emph{A}.
+This  structure can then be used to infer the most likely state of any given node given the state of any or all of the other  nodes in the network. For instance, if \emph{A} represents contact  with a diseased person and \emph{B} represents contraction of the  disease, \emph{A} causes \emph{B}, and there is some probability, written as \emph{Pr}(\emph{B} $|$ \emph{A}), that, given that \emph{A} occurs, \emph{B} also occurs. This probability is stored in the Bayesian Network in the data structure for node \emph{B}, and the probability of \emph{A} occurring in the first place, \emph{Pr}(\emph{A}), is stored in node \emph{A}.
 
 %The network establishes this structure by linking its nodes together in causal relationships, where for nodes A and B, A $\rightarrow$ B means that the value of node A is one cause of the value of node B. This structure can then be used to infer the most likely state of any given node given the states of any or all of the other nodes in the network.
 
@@ -417,7 +421,7 @@ This  structure can then be used to infer the most likely state of any given nod
 %This structure can then be used to infer the state of any given node given the states of any or all of the other nodes in the network. One key concept of Bayesian networks is that of blocking nodes --- nodes that, when their values are known, make the values of certain other nodes independent of each other. For instance, in the example with A $\rightarrow$ B $\leftarrow$ C, the value of A is influenced by B and therefore by C, unless the value of B is already known. In that case, A becomes independent of C because B blocks the path from C to A.
 %Knowledge of the conditional independencies between nodes can simplify the algorithms that work with a given Bayesian network and improve their performance by pointing out which nodes can be ignored.
 
-Because it is generally easier for a Bayesian network to learn the appropriate values for its probability tables than to learn the network topology, it is common to assume some canonical network structure when learning Bayesian networks from data, such as the particularly common \emph{na\"{i}ve Bayes}~\cite{Darwiche:10}. In a na\"{i}ve Bayesian network, there is one node \emph{C}, typically referred to as the class variable, and one or more nodes \emph{A$_{i}$}, referred to as attributes, such that \emph{C} $\rightarrow$ \emph{A$_{i}$}. This structure, and the slightly more complex \emph{tree-augmented na\"{i}ve Bayes}, perform surprisingly well for classification problems in general.~\cite{Friedman:97}\cite{Quinlan:93}
+Because it is generally easier for a Bayesian Network to learn the appropriate values for its probability tables than to learn the network topology, it is common to assume some canonical network structure when learning Bayesian Networks from data, such as the particularly common \emph{na\"{i}ve Bayes}~\cite{Darwiche:10}. In a na\"{i}ve Bayesian Network, there is one node \emph{C}, typically referred to as the class variable, and one or more nodes \emph{A$_{i}$}, referred to as attributes, such that \emph{C} $\rightarrow$ \emph{A$_{i}$}. This structure, and the slightly more complex \emph{tree-augmented na\"{i}ve Bayes}, perform surprisingly well for classification problems in general.~\cite{Friedman:97}\cite{Quinlan:93}
 
 %There are no direct associations between attributes, so every attribute is independent of all other attributes if the value of \emph{C} is known. For the problem of classification, such as when a system must select an appropriate transport protocol for a given quality of service (QoS), na\"{i}ve Bayesian networks produce surprisingly accurate results, considering that the attributes may not be independent in reality. In fact, this structure's predictive performance is on par with other classifiers such as C4.5.~\cite{Friedman:97}\cite{Quinlan:93} Building the attributes into a tree in addition to their connection to the classifier, in what is known as \emph{tree-augmented na\"{i}ve Bayes}, improves the network's accuracy even further.
 %If the network instead learns a \emph{tree-augmented} na\"{i}ve structure, in which the attributes are caused by other attributes in a tree structure in addition to being caused by the classifier, the network's accuracy consistently exceeds that of other classifiers and those of a na\"{i}ve Bayesian network.
@@ -426,29 +430,27 @@ Because it is generally easier for a Bayesian network to learn the appropriate v
 
 \section{Classification of AI Approaches}
 \label{classification}
-This section classifies or ``taxonomizes'' AI/ML approaches based on the needs of adaptive DRE systems as outlined in section ~\ref{taxonomy} as outlined in Table~\ref{tab:summary}. In particular, each AI approach surveyed is classified on the 4 properties needed for adaptive DRE systems, namely (1) supporting a distributed environment, (2) supporting real-time requirements, (3) supporting an embedded environment, and (4) incorporating new data into the approach as it becomes available while the system is running.
+This section classifies or ``taxonomizes'' AI approaches based on the needs of adaptive DRE systems as outlined in section ~\ref{taxonomy} as outlined in Table~\ref{tab:summary}. In particular, each AI approach surveyed is classified on the 4 properties needed for adaptive DRE systems, namely (1) supporting a distributed environment, (2) supporting real-time requirements, (3) supporting an embedded environment, and (4) incorporating new data into the approach as it becomes available while the system is running.
 
 \begin{table*} % TODO: Make the font green for a checkmark and red for an X (maybe).
-	\large
-	\caption{Summary of AI/ML Techniques}
+  \large
 	\centering
 	\begin{tabular}{c|c|c|c|c|c}
-	AI/ML Method              & Distributed & Real-Time & Embedded & Robust & Autodidactic \\
+	AI Method                             & Distributed & Real-Time & Embedded & Robust & Autodidactic \\
 	\hline
-	Artificial Neural Network & \cmark      & \cmark    & \cmark   & \cmark & \xmark \\
-	Bayesian Network (dynamic & \cmark      & \xmark    & \cmark   & \xmark & \xmark \\
-	structure)                &             &           &          &        &        \\
-	Bayesian Network (static  & \cmark      & \cmark    & \cmark   & \xmark & \cmark \\
-	structure)                &             &           &          &        &        \\
-	Expert System             & \cmark      & \xmark    & \xmark   & \xmark & \cmark \\
-	Reinforcement Learning    & \cmark      & \xmark    & \cmark   & \xmark & \xmark \\
+	Artificial Neural Network             & \cmark      & \cmark    & \cmark   & \cmark & \xmark \\
+	Bayesian Network (dynamic structure)  & \cmark      & \xmark    & \cmark   & \xmark & \xmark \\
+	Bayesian Network (static structure)   & \cmark      & \cmark    & \cmark   & \xmark & \cmark \\
+	Expert System                         & \cmark   & \xmark    & \xmark   & \xmark & \cmark \\
+	Reinforcement Learning                & \cmark      & \xmark    & \cmark   & \xmark & \xmark \\
 %	Decision Tree             & \cmark      & \cmark    & \cmark   & \xmark & \xmark \\
 % Why did we not have a subsection of section 5 for decision trees?
 % Jeremy, I'll work on decision trees and random forests after you make changes for Bayesian networks (i.e., save space).
-	Random Forest             & \cmark      & \cmark    & \cmark   & \cmark & \xmark \\
-	Support Vector Machine    & \cmark      & \cmark    & \cmark   & \cmark & \xmark
+	Random Forest                         & \cmark      & \cmark    & \cmark   & \cmark & \xmark \\
+	Support Vector Machine                & \cmark      & \cmark    & \cmark   & \cmark & \xmark
 	\end{tabular}
 	\label{tab:summary}
+	\caption{Summary of AI Techniques}
 \end{table*}
 
 %\begin{figure*}[t]
@@ -483,27 +485,27 @@ An ANN is generally a  good fit for an adaptive DRE system, but it suffers from 
 	%Unfortunately, an ANN does not easily learn from experience. The correct output must be known before the ANN can learn from a mistake, which implies either a more accurate AI technique employed alongside the ANN or human intervention, and then it must be trained again on the entire training set in addition to the new information that it is to learn. This training may conceivably be done on a separate processor in order to preserve the real-time requirement for using the network, but the time required for training is unbounded.
 
 $\bullet$ {\bf Bayesian Networks.}
-The general definition of a Bayesian network offers few guarantees about its timeliness or how it can learn over time. If a network changes its structure over time (\emph{e.g.}, for the purpose of learning), then the time required for evaluating the network is potentially unbounded. The rest of this section assumes a static structure to guarantee the possibility of real-time operation.
+The general definition of a Bayesian Network offers few guarantees about its timeliness or how it can learn over time. If a network changes its structure over time (\emph{e.g.}, for the purpose of learning), then the time required for evaluating the network is potentially unbounded. The rest of this section assumes a static structure to guarantee the possibility of real-time operation.
 %In particular, some implementations learn by adding or removing nodes and changing the connections between them. \textbf{\emph{[citation needed]}} This learning method removes the bound on the time required to analyze the network, making it fail the Real-Time and Autodidactic requirements. To maximize its ability to address all of the needs of an adaptive DRE system, we assume for the rest of this section that a Bayesian network does not change its structure in either of these ways. Under this restriction, Bayesian networks address most of the properties of adaptive DRE systems fairly well but are lacking in some areas.
 
-	\emph{Distributed.} A Bayesian network, although it deals with probabilities, is deterministic because it calculates the probabilities instead of the actual values of nodes.
+	\emph{Distributed.} A Bayesian Network, although it deals with probabilities, is deterministic because it calculates the probabilities instead of the actual values of nodes.
 %, which allows every part of a distributed system working with the same network to reach the same conclusions.
 	
-	\emph{Real-time.} Every prediction by a Bayesian network
+	\emph{Real-time.} Every prediction by a Bayesian Network
 %After a Bayesian network is constructed, every invocation on the network for adaptive guidance
 %satisfies the timeliness requirement of a real-time system by being
 can be bounded by the number of nodes in the network, the number of possible states for each node, and the number of connections between them.
 An explicit mathematical formula exists to calculate any probability in the network, using each possible state of a node and each connection no more than once.
 %The fact that the network is acyclic guarantees that no edge can be used more than once and that probabilities for each node's values do not need to be recalculated during the same invocation (\emph{i.e.}, a node cannot be a direct or indirect cause of itself, so it cannot affect its own probabilities). Some invocations might require fewer calculations because of conditional independence, but never more.
 	
-	\emph{Embedded.} Since a Bayesian network is used to determine the most likely value of a node given all available information, it can make decisions with high accuracy without human intervention, as embedded software systems require.
+	\emph{Embedded.} Since a Bayesian Network is used to determine the most likely value of a node given all available information, it can make decisions with high accuracy without human intervention, as embedded software systems require.
 	
-	\emph{Robust to new inputs.} A Bayesian network deals directly with probabilities, so it can be guaranteed to produce for any question the most likely answer given everything that it has learned. However, the opinion of a Bayesian network with discrete values for its nodes, which for the purposes of speedy computation and ease of understanding are usually used
+	\emph{Robust to new inputs.} A Bayesian Network deals directly with probabilities, so it can be guaranteed to produce for any question the most likely answer given everything that it has learned. However, the opinion of a Bayesian Network with discrete values for its nodes, which for the purposes of speedy computation and ease of understanding are usually used
 %(with continuous variables being mapped to discrete variables through step functions~\cite{Friedman:96})
 can be skewed by its lack of support for interpolation.
 %For instance, if a Bayesian network is designed to classify a risk as either low or high, then it will never indicate any level of risk between those two extremes.
 	
-	\emph{Autodidactic.} Some Bayesian networks can learn at run-time easily and in constant time by storing frequency counts rather than probabilities. In that case, each node contains a frequency for each of its possible states,
+	\emph{Autodidactic.} Some Bayesian Networks can learn at run-time easily and in constant time by storing frequency counts rather than probabilities. In that case, each node contains a frequency for each of its possible states,
 %denoted \emph{Fr}(\emph{x}) for state \emph{x},
 and each connection holds a frequency for each combination of the states of its endpoints.
 %, denoted \emph{Fr}(\emph{x}, \emph{y})
@@ -592,7 +594,7 @@ $\bullet$ {\bf Support Vector Machines (SVMs).} SVMs generally useful for adapti
 
 \emph{Embedded.} SVMs are decision making systems --- their classifications are done without the aid of human intervention allowing them to be implemented in an embedded system.
 
-\emph{Robust to new inputs.} SVMs support classification for new inputs. Moreover, in certain situations the accuracy of an SVM w.r.t. new  inputs has been shown to be better than other AI/ML methodologies such as artificial neural networks~\cite{Hoffert:11}.
+\emph{Robust to new inputs.} SVMs support classification for new inputs. Moreover, in certain situations the accuracy of an SVM w.r.t. new  inputs has been shown to be better than other AI methodologies such as artificial neural networks~\cite{Hoffert:11}.
 
 \emph{Autodidactic.} In order for an SVM to incorporate new classifications into the training set the SVM would have to be retrained. While an SVM is robust to data not included in training, the accuracy of an SVM is limited if it is not retrained with the new data. With an unbounded time complexity for training, SVMs do not support the autodidactic property.
 
@@ -600,7 +602,7 @@ $\bullet$ {\bf Support Vector Machines (SVMs).} SVMs generally useful for adapti
 \label{gap-analysis}
 Per analysis of the AI techniques for adaptive DRE systems, no single technique addresses all five areas of concern. Additionally, there is no AI technique that sufficiently addresses the autodidactic property of adaptive DRE systems. Additional research of AI techniques is needed to better understand the challenges and trade-offs and to address these deficiencies to more fully support adaptive DRE systems.
 %\textbf{\emph{One gap we can put here is being able to handle all the requirements for adaptive DRE systems. There doesn't seem to be any approach that handles all four concerns for adaptive DRE systems. For instance, some approaches can be updated while the system is running (\emph{e.g.}, expert systems can handle adding another rule). However, these systems aren't suitable for adaptive DRE systems (in the case of expert systems, there are timeliness concerns).}}
-\textbf{\emph{Dr. Hoffert, I've now proven that a Bayesian network can use the algorithm briefly described above to learn in a way that fits the autodidactic property. Also, we might want to say that an expert system satisfies it because the only problem is that using the system after learning isn't real-time, which is also a problem if it doesn't learn at all.}}
+\textbf{\emph{Dr. Hoffert, I've now proven that a Bayesian Network can use the algorithm briefly described above to learn in a way that fits the autodidactic property. Also, we might want to say that an expert system satisfies it because the only problem is that using the system after learning isn't real-time, which is also a problem if it doesn't learn at all.}}
 
 %\section{Concluding Remarks} -- REMOVE FOR SPACE
 %\label{summary}
