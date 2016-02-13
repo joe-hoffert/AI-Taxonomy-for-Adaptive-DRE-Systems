@@ -97,9 +97,11 @@
 %\documentclass{acm_proc_article-sp}
 %\usepackage[showframe]{geometry}
 
+\usepackage[margin=0.44in]{geometry}
 
 %\setlength{\voffset}{-0.5in}
 %\setlength{\headsep}{5pt}
+\setlength{\belowcaptionskip}{-10pt}
 
 \pagenumbering{arabic}
 
@@ -324,12 +326,12 @@ Non-binary attributes (\emph{i.e.}, attributes with more than two possible value
 %of classes, i.e., where there are more than two possible classifications of an appropriate transport protocol and parameter settings.
 
 % Short on space and this was Erik's write-up. It should be redone.
-%$\bullet$ {\bf Random Decision Forests.}
-%Random Decision Forests are a composition of decision trees where key aspects of each tree's functionality include some form of randomness. The random elements will create differing trees resulting in different paths to arrive at a classification.
-%After the forest is created, each tree will give a classification for the input data. The forest will select the most common classification returned by the composition of trees~\cite{Lin:06}.
-%
-%There are several strategies to introducing the randomness in a Random Forest. One strategy is to select random best-split characteristics attributes from the input data~\cite{Breiman:01}. The second method strategy is to randomly select which best-split features the tree will split on~\cite{Dietterich:2000}. A third method randomly selects subsets of the input data to achieve 100\% accuracy in classification on training data and increased accuracy in classification of unknown data~\cite{Ho:98}.
-%Lin and Yongho~\cite{Lin:06} also mention a fourth method called Extreme Randomness which combines the randomness in attribute selection and in splitting features.
+$\bullet$ {\bf Random Decision Forests.}
+Random Decision Forests are a composition of Decision Trees where attributes are randomly selected to generate a variety of Decision Trees. The randomness of attribute selection results in different classifications and the multitude of trees provides a more generalized coverage of attributes as opposed to any one single Decision Tree.
+After the forest is created, each tree will give a classification for the input data. The forest will select the most common classification returned by the composition of trees~\cite{Lin:06}.  For the remainder of this paper we have Random Decision Forests subsume the AI technique of Decision Trees since they are more generalized w.r.t. adaptive DRE systems.
+
+There are several strategies to introducing the randomness in a Random Forest. One strategy is to select random best-split characteristics attributes from the input data~\cite{Breiman:01}. The second method strategy is to randomly select which best-split features the tree will split on~\cite{Dietterich:2000}. A third method randomly selects subsets of the input data to achieve 100\% accuracy in classification on training data and increased accuracy in classification of unknown data~\cite{Ho:98}.
+Lin and Yongho~\cite{Lin:06} also mention a fourth method called Extreme Randomness which combines the randomness in attribute selection and in splitting features.
 
 $\bullet$ {\bf Support Vector Machines.}
 Support Vector machines (SVMs) are designed to find the greatest equal divide between classification axes for groups of input data. The SVM uses training data to build a model of data classification and obtain the greatest divide~\cite{Hoffert:10}. The training values are flagged with a classification schema so that when new data points are entered the SVM will use the separation to determine which schema-classification is appropriate for the new point. Finding the greatest separation will result in increased accuracy in classification for unknown input data.
@@ -415,6 +417,7 @@ This  structure can then be used to infer the most likely state of any given nod
 	\caption{\bf Bayesian Network Example}
 	\label{Fig:BayesianNet}
 \end{figure}
+\vspace{-0.3in}
 
 %One key concept of Bayesian networks is that of blocking nodes --- nodes that, when their values are known, make the values of certain other nodes independent of each other. For instance, in Figure~\ref{Fig:BayesianNet}, the value of \emph{D} is influenced by \emph{C} and therefore by \emph{A} and \emph{B}, unless the value of \emph{C} is already known. In that case, \emph{D} becomes independent of \emph{A} and \emph{B} because \emph{C} blocks the paths from \emph{A} to \emph{D} and from \emph{B} to \emph{D}. Knowledge of the conditional independences between nodes can simplify the algorithms that work with a given Bayesian network and improve their performance by pointing out which nodes can be ignored.
 
@@ -488,22 +491,25 @@ $\bullet$ {\bf Bayesian Networks.}
 The general definition of a Bayesian Network offers few guarantees about its timeliness or how it can learn over time. If a network changes its structure over time (\emph{e.g.}, for the purpose of learning), then the time required for evaluating the network is potentially unbounded. The rest of this section assumes a static structure to guarantee the possibility of real-time operation.
 %In particular, some implementations learn by adding or removing nodes and changing the connections between them. \textbf{\emph{[citation needed]}} This learning method removes the bound on the time required to analyze the network, making it fail the Real-Time and Autodidactic requirements. To maximize its ability to address all of the needs of an adaptive DRE system, we assume for the rest of this section that a Bayesian network does not change its structure in either of these ways. Under this restriction, Bayesian networks address most of the properties of adaptive DRE systems fairly well but are lacking in some areas.
 
-	\emph{Distributed.} A Bayesian Network, although it deals with probabilities, is deterministic because it calculates the probabilities instead of the actual values of nodes.
+	\emph{Distributed.} A Bayesian Network, although it deals with probabilities, is deterministic because it deterministically calculates results. Any Bayesian Network provides the same conclusion given the same probabilities and network structure.
+% Jeremy, the words below didn't make sense to me. I changed them above but please check that they make sense to you.
+%instead of the actual values of nodes.
 %, which allows every part of a distributed system working with the same network to reach the same conclusions.
 	
 	\emph{Real-time.} Every prediction by a Bayesian Network
 %After a Bayesian network is constructed, every invocation on the network for adaptive guidance
 %satisfies the timeliness requirement of a real-time system by being
 can be bounded by the number of nodes in the network, the number of possible states for each node, and the number of connections between them.
-An explicit mathematical formula exists to calculate any probability in the network, using each possible state of a node and each connection no more than once.
+% Jeremy, I tweaked this sentence below. Please make sure it makes sense to you.
+An explicit bounded-time mathematical formula calculates any probability in the network, using each possible state of a node and each connection no more than once.
 %The fact that the network is acyclic guarantees that no edge can be used more than once and that probabilities for each node's values do not need to be recalculated during the same invocation (\emph{i.e.}, a node cannot be a direct or indirect cause of itself, so it cannot affect its own probabilities). Some invocations might require fewer calculations because of conditional independence, but never more.
 	
 	\emph{Embedded.} Since a Bayesian Network is used to determine the most likely value of a node given all available information, it can make decisions with high accuracy without human intervention, as embedded software systems require.
 	
-	\emph{Robust to new inputs.} A Bayesian Network deals directly with probabilities, so it can be guaranteed to produce for any question the most likely answer given everything that it has learned. However, the opinion of a Bayesian Network with discrete values for its nodes, which for the purposes of speedy computation and ease of understanding are usually used
+	\emph{Robust to new inputs.} A Bayesian Network deals directly with probabilities, so it can be guaranteed to produce for any question the most likely answer given everything that it has learned. However, the conclusion of a Bayesian Network with discrete values for its nodes --- which are typically used for the purposes of timely computation and ease of understanding ---
 %(with continuous variables being mapped to discrete variables through step functions~\cite{Friedman:96})
 can be skewed by its lack of support for interpolation.
-%For instance, if a Bayesian network is designed to classify a risk as either low or high, then it will never indicate any level of risk between those two extremes.
+For instance, if a Bayesian network is designed to classify a risk as either low or high, then it will never indicate any level of risk between those two extremes.
 	
 	\emph{Autodidactic.} Some Bayesian Networks can learn at run-time easily and in constant time by storing frequency counts rather than probabilities. In that case, each node contains a frequency for each of its possible states,
 %denoted \emph{Fr}(\emph{x}) for state \emph{x},
@@ -512,6 +518,7 @@ and each connection holds a frequency for each combination of the states of its 
 %Then, after as many nodes' actual values as possible are measured following a prediction, all of the network's probabilities can be recomputed as if making another prediction in order to incorporate the known information.
 Increasing each frequency
 by the associated event's new probability after measuring
+% Jeremy, should ``measuring'' above be changed to something like ``feedback/new input''?
 %\emph{Fr}(\emph{x}) by \emph{Pr}(\emph{x}) and each \emph{Fr}(\emph{x}, \emph{y}) by \emph{Pr}(\emph{x} $|$ \emph{y}) $\cdot$ {Pr}(\emph{y})
 will move the initial probability of every state of a node toward its new probability. The proof is fairly simple but beyond the scope of this paper. Learning thus runs in bounded time, is deterministic, and needs no human intervention.
 
@@ -600,41 +607,21 @@ $\bullet$ {\bf Support Vector Machines (SVMs).} SVMs generally useful for adapti
 
 \section{Analyzing Gaps}
 \label{gap-analysis}
-Per analysis of the AI techniques for adaptive DRE systems, no single technique addresses all five areas of concern. Additionally, there is no AI technique that sufficiently addresses the autodidactic property of adaptive DRE systems. Additional research of AI techniques is needed to better understand the challenges and trade-offs and to address these deficiencies to more fully support adaptive DRE systems.
+Per analysis of the AI techniques for adaptive DRE systems, no single technique addresses all five areas of concern. Additionally, there is no AI technique that sufficiently addresses the autodidactic property of adaptive DRE systems aside from Expert Systems which have several other deficiencies.. Some of the techniques start to address the autodidactic property if certain constraints are applied (e.g., restricting Bayesian Networks from dynamically modifying the network topology).
+There are AI techniques that meet all but one of the 5 adaptive DRE properties and are therefore good starting points for further investigation. In general, additional research of AI techniques is needed to better understand the challenges and trade-offs and to address these deficiencies to fully support adaptive DRE systems.
 %\textbf{\emph{One gap we can put here is being able to handle all the requirements for adaptive DRE systems. There doesn't seem to be any approach that handles all four concerns for adaptive DRE systems. For instance, some approaches can be updated while the system is running (\emph{e.g.}, expert systems can handle adding another rule). However, these systems aren't suitable for adaptive DRE systems (in the case of expert systems, there are timeliness concerns).}}
-\textbf{\emph{Dr. Hoffert, I've now proven that a Bayesian Network can use the algorithm briefly described above to learn in a way that fits the autodidactic property. Also, we might want to say that an expert system satisfies it because the only problem is that using the system after learning isn't real-time, which is also a problem if it doesn't learn at all.}}
+%\textbf{\emph{Dr. Hoffert, I've now proven that a Bayesian Network can use the algorithm briefly described above to learn in a way that fits the autodidactic property. Also, we might want to say that an expert system satisfies it because the only problem is that using the system after learning isn't real-time, which is also a problem if it doesn't learn at all.}}
+% Jeremy, I tried to address your point above.
+% Jeremy, please look at the changes I made above to see if you agree with them particularly regarding Bayesian Networks.
 
-%\section{Concluding Remarks} -- REMOVE FOR SPACE
-%\label{summary}
-%DRE systems are being used for control in many important domains (\emph{e.g.}, power grid, shipboard computing environments, manufacturing). Historically, these systems have been analyzed a priori to provide for provisioning resources and determining behavior. However, these systems can benefit from adaptation to leverage resources more appropriately and to respond to environments or situations not encountered previously. Artificial intelligence approaches can be used to enable this type of adaptation.
-%
-%Many AI approaches have been developed over the years. Some of these approaches are more amenable than others relative to the properties and requirements of DRE systems. The work outlined in this paper has furthered this research in the following ways. The properties of DRE systems relative to adaptation have been clearly enumerated and defined. Several AI approaches have been summarized and taxonomized using the enumerated properties. Gap analysis has been performed to show areas of further investigation and research.
-%
-%The AI approaches included in this work are non-exhaustive. In particular, there are hybrid approaches that include aspects of multiple traditional AI approaches (\emph{e.g.}, neural networks and expert systems~\cite{Sahin:2012}). However, the taxonomy developed can be used to evaluate new or hybrid approaches for consideration with adaptive DRE systems.
 
-%Our findings reflect two primary problems with existing work.  The first problem
-%is a lack of existing support.  Several projects fill some of the gaps we have identified, but no project
-%fills all the gaps.  Moreover, most projects are not actively maintained.
-%In order for progress to be made in the area of adaptive
-%networking, it is important that the development of software keep pace with the
-%growth of the industry at large.
-%
-%Secondly, the existence of a standard would be greatly beneficial to expanding
-%work on adaptive networking software, especially within specific network layers.
-%Currently, projects pursue their goals by whatever method those involved
-%perceive to be the best.  This allows for relatively quick progress to be made,
-%but inhibits integration of elements from multiple different projects.  This
-%shortcoming will become more pronounced as relevant software and concepts
-%appear.  Hence, the lack of standards in this area is a major hurdle standing
-%in the way of commercialized adaptive networking.
-%
-%Overall, we found several pieces of work related to protocol frameworks.  These
-%ranged from specific protocol implementations to overhauls of the entire
-%network stack.  Our taxonomy identifies some strengths of existing work, including
-%support for non-standard protocols.
-%However, we also reveal several important but absent features and areas for future
-%work, most notably a lack of fine grained control over transitions from one
-%protocol to another.
+\section{Concluding Remarks}
+\label{summary}
+DRE systems are being used for control in many important domains (\emph{e.g.}, power grid, shipboard computing environments, manufacturing). Historically, these systems have been analyzed a priori to provide for provisioning resources and determining behavior. However, these systems can benefit from adaptation to leverage resources more appropriately and to respond to environments or situations not encountered previously. Artificial intelligence approaches can be used to enable this type of adaptation.
+
+Many AI approaches have been developed over the years. Some of these approaches are more amenable than others relative to the properties and requirements of DRE systems. The work outlined in this paper has furthered this research in the following ways. The properties of DRE systems relative to adaptation have been clearly enumerated and defined. Several AI approaches have been summarized and taxonomized using the enumerated properties. Gap analysis has been performed to show areas of further investigation and research.
+
+The AI approaches included in this work are non-exhaustive. In particular, there are hybrid approaches that include aspects of multiple traditional AI approaches (\emph{e.g.}, neural networks and expert systems~\cite{Sahin:2012}). However, the taxonomy developed can be used to evaluate new or hybrid approaches for consideration with adaptive DRE systems.
 
 %\section*{Acknowledgments}
 % 
