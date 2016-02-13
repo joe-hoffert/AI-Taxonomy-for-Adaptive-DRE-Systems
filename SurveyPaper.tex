@@ -181,9 +181,9 @@ Email: jeremy.davis11004@myemail.indwes.edu, joe.hoffert@indwes.edu, erik.vanlan
 \maketitle
 
 \begin{abstract}
-Distributed real-time embedded (DRE) software systems such as are used to manage critical large-scale infrastructure are important systems to consider for increasing functionality and resiliency. DRE systems that can adapt to changes in the environment and/or changes in available resources are more robust to unexpected changes and extend both the systems' usefulness and lifespan. Artificial intelligence techniques are used for adaptation of software systems in general. However, they must meet certain requirements to be appropriate for use with DRE systems.
+Distributed real-time embedded (DRE) software systems such as are used to manage critical large-scale infrastructure are important systems to target for increased functionality and resiliency. DRE systems that can adapt to changes in the environment and/or changes in available resources are more robust to unexpected changes and extend both the systems' utility and lifespan. Artificial intelligence techniques are used for adaptation of software systems in general. However, they must meet certain requirements to be appropriate for use with DRE systems.
 
-Any artificial intelligence technique used in an adaptive DRE system should produce consistent results across a distributed system, operate in bounded time, make decisions autonomously, and gracefully handle and learn from previously unencountered environments. This paper surveys a variety of artificial intelligence (AI) techniques, providing a brief overview of each method, evaluating how each technique fits the requirements of an adaptive DRE system, and recognizing the gaps in each technique's ability to meet all of these requirements. Our results show that there is not one single AI technique that is a perfect fit for adaptive DRE systems, although some techniques address more of these requirements than others.
+Any artificial intelligence technique used in an adaptive DRE system should produce consistent results across a distributed system, operate in bounded time, make decisions autonomously, and gracefully handle and learn from previously unencountered environments. This paper surveys a variety of artificial intelligence (AI) techniques, providing a brief overview of each method, evaluating how each technique fits the requirements of an adaptive DRE system, and recognizing the gaps in each technique's ability to meet all of these requirements. Our results show that there is not one single AI technique in our survey that is a perfect fit for adaptive DRE systems, although some techniques address more of these requirements than others.
 
 %The growing prevalence of distributed real-time embedded systems in
 %applications such as emergency response, disaster recovery, and ambient assisted living
@@ -206,9 +206,9 @@ Any artificial intelligence technique used in an adaptive DRE system should prod
 \label{intro}
 Distributed real-time embedded (DRE) software systems are used to manage critical large\--scale infrastructure across a wide range of platforms and domains. Such systems include air traffic management, regional and national power grids, shipboard computing environments for military platforms, and disaster recovery operations~\cite{Hoffert:11}. The importance of these systems motivates the need for flexibility so that the systems can respond appropriately in situations not previously planned. However, traditionally these types of systems have been developed for rigidly controlled environment and resource allocations determined \emph{a priori}.
 
-DRE systems that can adapt to changes in the environment and/or changes in available resources are more robust to unexpected changes and extend both the systems' usefulness and lifespan. One approach to provide adaptability for DRE systems is to incorporate artificial intelligences techniques that can respond to changes in the environment and in resource allocation. The benefits of this adaptability are two-fold: (1) managing expected environment and resource changes can be simplified and (2) appropriate responses can be generated for unexpected changes. 
+DRE systems that can adapt to changes in the environment and/or changes in available resources are more robust to unexpected changes and extend both the usefulness of the systems and their lifespans. One approach to provide adaptability for DRE systems is to incorporate artificial intelligence (AI) techniques that can respond to changes in the environment and in resource allocation. The benefits of this adaptability are two-fold: (1) managing expected environment and resource changes can be simplified and (2) appropriate responses can be generated for unexpected changes. 
 
-Many artificial intelligence techniques have been developed over the past several decades. However, not all of these techniques are equally appropriate for use with adaptive DRE systems. Some AI techniques do not address critical properties that DRE systems must have in order to provide the functionality needed.
+Many AI techniques have been developed over the past several decades. However, not all of these techniques are equally appropriate for use with adaptive DRE systems. Some AI techniques do not address critical properties that DRE systems must have in order to provide the functionality needed.
 
 This paper provides insight into adaptive DRE systems in the following ways. (1) It provides an enumeration and description of critical properties of adaptive DRE systems. (2) It surveys and briefly describes common AI techniques. (3) It taxonomizes the AI techniques based on the critical properties of adaptive DRE systems. (4) It provides gap analysis of the AI techniques to explore where additional research is needed when incorporating AI techniques into adaptive DRE sytems.
 
@@ -226,13 +226,13 @@ This paper provides insight into adaptive DRE systems in the following ways. (1)
 
 Software control of regional and national power grids --- referred to as smart grids~\cite{Ramchurn:12} --- are increasing in popularity due to the complexity of grid management and the flexibility and responsiveness that software systems provide. In particular, adaptive DRE systems support smart grids well because of (1) the distributed nature of disseminating power, (2) the timeliness requirements of addressing changes in the system, and (3) the embedded nature of a widely diverse system which precludes regular direct human control and intervention. This section describes the motivating example of an electrical smart grid that is controlled by adaptive DRE software. This example is useful when evaluating various AI techniques for use with an adaptive DRE system.
 
-In 2003, 50 million people lost power in the northeast U.S. and southeast Canada~\cite{Minkel:08}. The problem can be traced back to a single power line that went down in northern Ohio. When a power line goes down the demand for power can be re-routed through other lines. The transformers and the power lines themselves can be overloaded so that they shutdown. Power lines can soften due to the heat of the high current since additional power is being re-routed through them. Once one power line or transformer is shutdown the needed power is re-routed yet again and there can be a cascading shutdown effect. There were several causes that led to the massive shutdown of power. Without timely intervention and flexible response to the initial overload conditions, widespread loss of power can occur causing inconvenience, damage, and even loss of life.
+In 2003, 50 million people lost power in the northeast U.S. and southeast Canada~\cite{Minkel:08}. The problem can be traced back to a single power line that went down in northern Ohio. When a power line goes down the demand for power is re-routed through other lines. The transformers and the power lines themselves can be overloaded so that they shutdown. Power lines can soften due to the heat of the high current since additional power is being re-routed through them. Once one power line or transformer is shutdown the needed power is re-routed yet again and there can be a cascading shutdown effect. Without timely intervention and flexible response to the initial overload conditions, widespread loss of power can occur causing inconvenience, damage, and even loss of life.
 
 Power grid service is critical to the healthy functioning of regional and national infrastructure. Loss of power can mean loss of life both directly (\emph{e.g.}, medical systems used to maintain patient health) and indirectly (\emph{e.g.}, traffic light outages resulting in deaths from crashes). Moreover, loss of power can be very costly for businesses and services that rely upon that power~\cite{Chen:10}.
 
 While disruptions can occur in the environment (\emph{e.g.}, substation outages due to inclement weather) and in the system itself (\emph{e.g.}, upgrades and maintenance) adapting to changes and maintaining acceptable service is crucial for modern day power grids. Power grid systems leverage the properties of adaptive DRE systems to manage changes in the environment and/or the system. These adaptive DRE properties are enumerated as follows:
 
-\emph{Adaptive changes should be consistent across the distributed power grid.} Otherwise the power grid will be in an inconsistent and potentially unstable state. An inconsistent view of the system can cause unneeded and potentially dangerous local changes. An unnecessary shutdown in one part of the grid could cascade throughout the entire grid with catastrophic cconsequences.
+\emph{Adaptive changes should be consistent across the distributed power grid.} Otherwise the power grid will be in an inconsistent and potentially unstable state. An inconsistent view of the system can cause unneeded and potentially dangerous local changes. An unnecessary shutdown in one part of the grid could cascade throughout the entire grid with catastrophic consequences.
 
 \emph{Adaptive changes should be done in a bounded amount of time.} Otherwise the adaptation that is carried out will be too late to be effective. An appropriate change that is implemented too late becomes an inappropriate change when timeliness is important. Untimely changes could worsen the status of the power grid by creating instability and initiating changes that are no longer appropriate because the overall state of the grid has changed.
 
@@ -241,7 +241,7 @@ While disruptions can occur in the environment (\emph{e.g.}, substation outages 
 \emph{Adaptive changes should be robust to unforeseen perturbations.} Otherwise, undesirable performance or behavior might occur because of these perturbations. Circumstances that weren't previously predicted can occur with a system as large and complex as a power grid and any adaptive change should gracefully handle these circumstances even if these circumstances have not been accounted for \emph{a priori}.
 
 \emph{Adaptation should incorporate unforeseen perturbations into an overall strategy.}
-Otherwise, the power grid's resiliency will be lessened if it can not learn from previous changes. So that the power grid will be more resilient it should incorporate any unforeseen circumstances into its adaptation strategy. Once the initially unforeseen circumstances are handled the power grid should adapt to anticipate these circumstances should they arise again. Therefore, the next time these circumstances are encountered the grid can better respond.
+Otherwise, the power grid's resiliency will be lessened if it can not learn from previous changes. So that the power grid will be more resilient, it should incorporate any unforeseen circumstances into its adaptation strategy. Once the initially unforeseen circumstances are handled the power grid should adapt to anticipate these circumstances should they arise again. Therefore, the next time these circumstances are encountered the grid can better respond.
 %smart power grid that publishes relevant system status information to homeland security depending on the environment conditions? Higher priority for data to sent to first reponders if a malicious attach is detected?
 
 \section{Taxonomy for Adaptive DRE Systems}
@@ -250,16 +250,18 @@ This section presents the taxonomy for adaptive DRE systems. For any approach us
 \begin{enumerate}
 \item \textbf{Distributed.} The adaptive approach used should support a distributed environment. One tactic for supporting the distributed property is to provide deterministic behavior. This behavior can then be consistently replicated on all the computational nodes or machines utilized in this system. With this approach the behavior for any one computational node is known \emph{a priori} and will be the same across all nodes.
 
-\item \textbf{Real-time.} The adaptive approach used should support real-time timeliness requirements. At a minimum any approach used for adaptation should provide bounded-time complexity (\emph{i.e.}, the worst-case time is known \emph{a priori}). This timeliness property allows for the analysis and design of the system such that allocation and deployment of resources will meet the needed timeliness requirements. Ideally, the time complexity will be constant time to ease analysis and development. However, at a minimum, any adaptive approach must provide a bounded timeliness which allows for worst-case execution time (WCET) analysis and design.
+\item \textbf{Real-time.} The adaptive approach used should support real-time timeliness requirements. At a minimum any approach used for adaptation should provide bounded-time complexity (\emph{i.e.}, the worst-case time is known \emph{a priori}). This timeliness property allows for the analysis and design of the system such that allocation and deployment of resources will meet the needed timeliness requirements. Ideally, the time complexity will be constant time to ease analysis and development.
+% I think this sentence is a repeat: However, at a minimum, any adaptive approach must provide a bounded timeliness which allows for worst-case execution time (WCET) analysis and design.
 % Another aspect of timeliness can be even the order of the bounded or constant time. If an approach is bounded (constant) will that bounded (or constant) time be good enough for the particular situation so that adaptations are timely. Or will the decision phase take too long to be usable? I think this is a case-by-case basis and performance improvements can be made if the time is bounded/constant. If it's not then there are no assurances that all the resources in the world will be enough to meet timeliness requirements.
 
 \item \textbf{Embedded.} The adaptive approach used should support an embedded environment. Embedded computer systems are developed in such a way that the user is not consciously aware that they are interacting with a computer system. Embedded computer systems present an interface that is familiar and common for the domain of the user. For example, an embedded computer system can be used in a vending machine that dispenses drinks. The user interfaces with the machine by inserting money and making a selection by pushing buttons. The computer system decides if the appropriate money has been deposited as well as determining if the selection is valid (including checking that a normally valid selection is still available).
 
-Embedded computer systems are typically constrained in the resources available (\emph{e.g.}, memory, computational power) since the system must conform to particular space and footprint requirements which limit space for the computational resources. Embedded computer systems also typically can not rely on expert human intervention. The user interacting with the system will generally not be a computer system expert. Therefore, the computer system needs to be autonomous in its execution and decision-making.
+Embedded computer systems are typically constrained in the resources available (\emph{e.g.}, memory, computational power) since the system must conform to particular space and footprint requirements which limit space for the computational resources. Embedded computer systems also typically cannot rely on expert human intervention. The user interacting with the system will generally not be a computer system expert. Therefore, the computer system needs to be autonomous in its execution and decision-making.
 
 \item \textbf{Robust to new inputs.} Adaptive DRE systems need to be robust in handling inputs that have not been previously encountered. A critical property for adaptive DRE systems is gracefully handling unexpected situations. The adaptive approach used should be able to provide reasonable adaptation in these cases even if the adaptation is less than ideal.
 
-\item \textbf{Autodidactic.} Learning at run-time. Modifiable during run-time. The adaptive approach used should support being updated with new information as it becomes available. As the adaptive DRE system runs
+\item \textbf{Autodidactic.} %Learning at run-time. Modifiable during run-time.
+The adaptive approach used should support being updated with new information as it becomes available. As the adaptive DRE system runs
 it will encounter new information relevant to its adaptation. For example, if a system
 is designed to adapt to a new environment configuration, there will be environment
 configurations the adaptive approach has not encountered previously.
@@ -267,24 +269,24 @@ configurations the adaptive approach has not encountered previously.
 The adaptive approach should handle any new information appropriately (as referenced in the previous property) but additionally should
 leverage this new information to prepare for additional new configurations. For example, supervised
 machine learning approaches should use this new information as additional training data.
-Ideally, when the learning approach is leveraging the new information as part of its training data the other properties should be supported as well, namely, distributed, real-time, and embedded.
+Moreover, when the learning approach is leveraging the new information as part of its training data the other relevant properties (\emph{i.e.}, distributed, real-time, and embedded) need to be supported as well.
 
 \end{enumerate}
 
 \section{AI Approaches}
 \label{ml-approaches}
 
-This section provides a brief overview of various artificial intelligence approaches considered. This section highlights distinguishing aspects of each approach.
+This section provides a brief overview of various AI approaches considered. This section highlights distinguishing aspects of each approach.
 This overview is leveraged in Section~\ref{classification} where the paper
 taxonomizes the approaches based on the categories described in
 Section~\ref{taxonomy}.
 
 $\bullet$ {\bf Reinforcement Learning.}  Reinforcement learning~\cite{Kober:13}\cite{Russell:10}
-is an approach where general, broad-based negative and positive reinforcement is used to guide learning. For example, a program or agent developed to learn strategies for winning a game would receive feedback when the game was won (\emph{i.e.}, positive reinforcement) or lost (\emph{i.e.}, negative reinforcement). From this general reinforcement, the program would develop strategies to determine what moves to make and what moves not to make.
+is an approach where general, broad-based negative and positive reinforcement is used to guide learning. For example, a program or agent developed to learn strategies for winning a game would receive feedback when the game was won (\emph{i.e.}, positive reinforcement) or lost (\emph{i.e.}, negative reinforcement). From this general reinforcement, the program would develop strategies to determine what moves to make and not make.
 These strategies are generally developed based on states and actions from and to those states. Several designs are used for developing strategies including:
 \begin{enumerate}
 \item a utility-based agent: which learns a utility function on the different states and uses this function to select an action that maximizes the expected outcome;
-\item a Q-learning agent: which learns a utility function on the different actions (\emph{a.k.a.} Q-function) and selects that an action with the highest utility; and
+\item a Q-learning agent: which learns a utility function on the different actions (\emph{a.k.a.} Q-function) and selects the action with the highest utility; and
 \item a reflex agent: which learns a policy mapping directly from states to actions.
 \end{enumerate}
 
@@ -295,14 +297,14 @@ knowledge from domain experts. An expert system can be thought of as a surrogate
 human experts. This approach is motivated by the lack of expert availability and coordination concerns (\emph{e.g.}, logistics of gathering all relevant experts in one place at one time). Experts are solicited for general
 rules that they use to make decisions within a particular domain (\emph{e.g.}, medical diagnosis, network configuration). These rules are entered and supported by the expert system along with inferences that can be made between the rules and the domain information available.
 
-An early example of using expert systems is found in the DENDRAL program~\cite{Buchanan:69}. This program was developed to solve the problem of inferring molecular structure from the results of a mass spectrometer. DENDRAL leveraged the knowledge of analytical chemists to shrink the intractable search space to a manageable size. The success of DENDRAL initiated the practice of mapping a general form to an efficient special form~\cite{Feigenbaum:71} encapsulated in expert systems.
+An early example of using expert systems is found in the DENDRAL program~\cite{Buchanan:69}. This program was developed to infer molecular structure from the results of a mass spectrometer. DENDRAL leveraged the knowledge of analytical chemists to shrink the intractable search space to a manageable size. The success of DENDRAL initiated the practice of mapping a general form to an efficient special form~\cite{Feigenbaum:71} encapsulated in expert systems.
 
 $\bullet$ {\bf Decision Trees.} A decision tree utilizes the tree data structure containing vertices and edges (a.k.a. branches). Non-leaf vertices correspond to decisions made regarding attributes in the solution space. Leaf vertices result in a classification made based on the attributes. A decision tree is typically a binary tree where the two branches leaving a node correspond to the presence or absence respectively of the attribute for that vertex.
 
 Each node references the attribute that yields the greatest divide between the data samples being classified~\cite{Russell:10}. This design produces the shortest and smallest tree
 possible while maintaining accuracy by looking for features that
-best split the data as completely as possible and use them closer to the root.
-Non-binary attributes (\emph{i.e.}, attributes with more than two possible values) can be referenced in more than one node based on the value of the attribute. For example, one node could split the data samples based on the value of an attribute being less than 10. Another node could split the data samples based on the same attribute but being greater than 100. A leaf node determines the classification for the input data.
+best split the data as completely as possible.
+Non-binary attributes (\emph{i.e.}, attributes with more than two possible values) can be referenced in more than one node based on the value of the attribute. For example, one node could split the data samples based on the value of an attribute being less than 10. Another node could split the data samples based on the same attribute being greater than 100. A leaf node determines the classification for the input data.
 
 % We don't reference this anyplace and we're short on space.
 %\begin{figure}[t]
@@ -330,13 +332,13 @@ $\bullet$ {\bf Random Decision Forests.}
 Random Decision Forests are a composition of Decision Trees where attributes are randomly selected to generate a variety of Decision Trees. The randomness of attribute selection results in different classifications and the multitude of trees provides a more generalized coverage of attributes as opposed to any one single Decision Tree.
 After the forest is created, each tree will give a classification for the input data. The forest will select the most common classification returned by the composition of trees~\cite{Lin:06}.  For the remainder of this paper we have Random Decision Forests subsume the AI technique of Decision Trees since they are more generalized w.r.t. adaptive DRE systems.
 
-There are several strategies to introducing the randomness in a Random Forest. One strategy is to select random best-split characteristics attributes from the input data~\cite{Breiman:01}. The second method strategy is to randomly select which best-split features the tree will split on~\cite{Dietterich:2000}. A third method randomly selects subsets of the input data to achieve 100\% accuracy in classification on training data and increased accuracy in classification of unknown data~\cite{Ho:98}.
+There are several strategies to introduce randomness in a Random Forest. One strategy is to select random best-split characteristics attributes from the input data~\cite{Breiman:01}. The second method strategy is to randomly select which best-split features the tree will split on~\cite{Dietterich:2000}. A third method randomly selects subsets of the input data to achieve 100\% accuracy in classification on training data and increased accuracy in classification of unknown data~\cite{Ho:98}.
 Lin and Yongho~\cite{Lin:06} also mention a fourth method called Extreme Randomness which combines the randomness in attribute selection and in splitting features.
 
 $\bullet$ {\bf Support Vector Machines.}
 Support Vector machines (SVMs) are designed to find the greatest equal divide between classification axes for groups of input data. The SVM uses training data to build a model of data classification and obtain the greatest divide~\cite{Hoffert:10}. The training values are flagged with a classification schema so that when new data points are entered the SVM will use the separation to determine which schema-classification is appropriate for the new point. Finding the greatest separation will result in increased accuracy in classification for unknown input data.
 
-	Fig.~\ref{Fig:SVM} shows group 1 (denoted by filled circles), group 2 (denoted by open circles), and an unknown input in gray. The circles in black are training examples, and the solid line is the greatest separation between the groups that the SVM will use to classify to which group the new entry belongs. An SVM would select the solid line for classification which maximizes the likelihood of appropriate classification for any new data. The dashed line represents a possible classification that accurately separates the existing data. When new data becomes available (as denoted by the gray circle) the SVM would have the highest likelihood of correct classification and would classify the gray circle into group two.
+	Fig.~\ref{Fig:SVM} shows group 1 (denoted by filled circles), group 2 (denoted by open circles), and an unknown input in gray. The circles in black are training examples, and the solid line is the greatest separation between the groups that the SVM will use to classify to which group the new entry belongs. An SVM would select the solid line for classification which maximizes the likelihood of appropriate classification for any new data. The dashed line represents a possible classification that accurately separates the existing data. When new data becomes available (as denoted by the gray circle) the SVM would have the highest likelihood of correct classification and would classify the gray circle into group 2.
 
 \begin{figure}[t]
 	\centering
@@ -379,9 +381,11 @@ Support Vector machines (SVMs) are designed to find the greatest equal divide be
 %is therefore incorrectly classified whereas with C2 the new example would be correctly classified. An SVM maximizes the margin of differences between classification groupings. [Can add figure]''
 
 $\bullet$ {\bf Artificial Neural Networks.}
-The artificial neural network (ANN) is an AI technique based on a biological model
+Artificial Neural Network (ANNs) are an AI technique based on a biological model
 of the human brain. An ANN has the useful ability to find patterns in empirical data
-to generalize its behavior to similar, but not previously encountered, data. [1] Each
+to generalize its behavior to similar, but not previously encountered, data.
+% Jeremy, there was a [1] here. Do we have a citation to go with this sentence?
+Each
 node in the network, called a \emph{neuron}, outputs a nonlinear transformation of a weighted
 sum of its inputs --- that is, \emph{f}($\sum$$w_i$$x_i$) for some function \emph{f}
 (known as the activation function), inputs $x_i$, and associated weights $w_i$.
@@ -393,15 +397,14 @@ environment, and nodes in the output layer produce the network's learned respons
 the given input. The hidden layers lie between the input and output layers and are
 ``hidden'' in that their states cannot be known based on the input and output alone. In
 general, each layer produces input for the neurons in the next layer, although some
-networks' structures (called recurrent)~\cite{Philips-Wren:12} send some output from one layer to an earlier layer or to nodes
-in the same layer.
+networks' structures (called recurrent)~\cite{Philips-Wren:12} send some output from one layer to an earlier layer or to nodes in the same layer.
 
 $\bullet$ {\bf Bayesian Networks.} A Bayesian Network (BN) is a structured representation of the attributes of a system and their interconnected probabilities which represent the system as a coherent whole~\cite{Darwiche:10}.
 %A Bayesian network is a way of structuring
 %probabilistic information about a situation into a coherent whole.~\cite{Darwiche:10}
 The network establishes this structure by linking its nodes together in a directed acyclic graph of causal relationships, where for nodes \emph{A} and \emph{B}, \emph{A} $\rightarrow$ \emph{B} means, roughly, that the value of node \emph{A} is one cause of the value of node \emph{B}.
 %(Technically, the direction of causality is not always important because of the nature of probabilities. Knowing that the effect happened makes it more likely that the cause also happened, just as knowing that the cause happened makes the effect more likely.)
-This  structure can then be used to infer the most likely state of any given node given the state of any or all of the other  nodes in the network. For instance, if \emph{A} represents contact  with a diseased person and \emph{B} represents contraction of the  disease, \emph{A} causes \emph{B}, and there is some probability, written as \emph{Pr}(\emph{B} $|$ \emph{A}), that, given that \emph{A} occurs, \emph{B} also occurs. This probability is stored in the Bayesian Network in the data structure for node \emph{B}, and the probability of \emph{A} occurring in the first place, \emph{Pr}(\emph{A}), is stored in node \emph{A}.
+This  structure can then be used to infer the most likely state of any given node given the state of any or all of the other nodes in the network. For instance, if \emph{A} represents contact  with a diseased person and \emph{B} represents contraction of the  disease, \emph{A} causes \emph{B}, and there is some probability, written as \emph{Pr}(\emph{B} $|$ \emph{A}), that, given that \emph{A} occurs, \emph{B} also occurs. This probability is stored in the Bayesian Network in the data structure for node \emph{B}, and the probability of \emph{A} occurring in the first place, \emph{Pr}(\emph{A}), is stored in node \emph{A}.
 
 %The network establishes this structure by linking its nodes together in causal relationships, where for nodes A and B, A $\rightarrow$ B means that the value of node A is one cause of the value of node B. This structure can then be used to infer the most likely state of any given node given the states of any or all of the other nodes in the network.
 
@@ -412,6 +415,7 @@ This  structure can then be used to infer the most likely state of any given nod
 %This structure can then be used to infer the state of any given node given the states of any or all of the other nodes in the network. One key concept of Bayesian networks is that of blocking nodes --- nodes that, when their values are known, make the values of certain other nodes independent of each other. For instance, in the example with A $\rightarrow$ B $\leftarrow$ C, the value of A is influenced by B and therefore by C, unless the value of B is already known. In that case, A becomes independent of C because B blocks the path from C to A.
 %Knowledge of the conditional independencies between nodes can simplify the algorithms that work with a given Bayesian network and improve their performance by pointing out which nodes can be ignored.
 
+% Jeremy, we don't reference this figure anymore. Either we should reference it or remove it.
 \begin{figure}[t]
 	\centering
 	\includegraphics[height=1.5in, width=2.5in]{BayesianNetwork.png}
@@ -424,7 +428,7 @@ This  structure can then be used to infer the most likely state of any given nod
 \end{figure}
 %\vspace{-0.3in}
 
-Because it is generally easier for a Bayesian Network to learn the appropriate values for its probability tables than to learn the network topology, it is common to assume some canonical network structure when learning Bayesian Networks from data, such as the particularly common \emph{na\"{i}ve Bayes}~\cite{Darwiche:10}. In a na\"{i}ve Bayesian Network, there is one node \emph{C}, typically referred to as the class variable, and one or more nodes \emph{A$_{i}$}, referred to as attributes, such that \emph{C} $\rightarrow$ \emph{A$_{i}$}. This structure, and the slightly more complex \emph{tree-augmented na\"{i}ve Bayes}, perform surprisingly well for classification problems in general.~\cite{Friedman:97}\cite{Quinlan:93}
+Because it is generally easier for a Bayesian Network to learn the appropriate values for its probability tables than to learn the network topology, it is common to assume some canonical network structure when learning Bayesian Networks from data, such as the particularly common \emph{na\"{i}ve Bayes}~\cite{Darwiche:10}. In a na\"{i}ve Bayesian Network, there is one node \emph{C}, typically referred to as the class variable, and one or more nodes \emph{A$_{i}$}, referred to as attributes, such that \emph{C} $\rightarrow$ \emph{A$_{i}$}. This structure, and the slightly more complex \emph{tree-augmented na\"{i}ve Bayes}, perform surprisingly well for classification problems in general~\cite{Friedman:97}\cite{Quinlan:93}.
 
 %There are no direct associations between attributes, so every attribute is independent of all other attributes if the value of \emph{C} is known. For the problem of classification, such as when a system must select an appropriate transport protocol for a given quality of service (QoS), na\"{i}ve Bayesian networks produce surprisingly accurate results, considering that the attributes may not be independent in reality. In fact, this structure's predictive performance is on par with other classifiers such as C4.5.~\cite{Friedman:97}\cite{Quinlan:93} Building the attributes into a tree in addition to their connection to the classifier, in what is known as \emph{tree-augmented na\"{i}ve Bayes}, improves the network's accuracy even further.
 %If the network instead learns a \emph{tree-augmented} na\"{i}ve structure, in which the attributes are caused by other attributes in a tree structure in addition to being caused by the classifier, the network's accuracy consistently exceeds that of other classifiers and those of a na\"{i}ve Bayesian network.
