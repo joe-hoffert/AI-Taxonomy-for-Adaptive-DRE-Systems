@@ -97,7 +97,7 @@
 %\documentclass{acm_proc_article-sp}
 %\usepackage[showframe]{geometry}
 
-\usepackage[margin=0.44in]{geometry}
+\usepackage[margin=0.45in]{geometry}
 
 %\setlength{\voffset}{-0.5in}
 %\setlength{\headsep}{5pt}
@@ -359,6 +359,7 @@ but does not perform as well with new data.
 %        \vspace{-0.1in}
 	\caption{\bf Support Vector Machine Example}
 	\label{Fig:SVM}
+	\vspace{-0.25in}
 \end{figure}
 
 	%When points of differing flag characteristics become centrally located, mathematical transformation [Would I need a Source for this? it is a common mathematical practice] into hyper-planes allow the SVM to make the proper classification. The timeliness of which the SVM responds is dependant on the Kernel it uses~\cite{Hoffert:11}.
@@ -436,8 +437,8 @@ Figure~\ref{Fig:BayesianNet} provides an example BN where each variable can be  
 %        \vspace{-0.1in}
 	\caption{\bf Bayesian Network Example}
 	\label{Fig:BayesianNet}
+	\vspace{-0.25in}
 \end{figure}
-%\vspace{-0.3in}
 
 Because it is generally easier for a BN to learn the best values for its probability tables than to learn an appropriate network topology, it is common to assume some canonical network structure when learning BNs from data, such as the particularly common \emph{na\"{i}ve Bayes}~\cite{Darwiche:10}. In a na\"{i}ve BN, there is one node \emph{C}, typically referred to as the class variable, and one or more nodes \emph{A$_{i}$}, referred to as attributes, such that \emph{C} $\rightarrow$ \emph{A$_{i}$}. This structure, and the slightly more complex \emph{tree-augmented na\"{i}ve Bayes}, perform surprisingly well for classification problems in general~\cite{Friedman:97}\cite{Quinlan:93}.
 
@@ -467,6 +468,7 @@ This section classifies or ``taxonomizes'' AI approaches based on the needs of a
 	\end{tabular}
 	\label{tab:summary}
 	\caption{Summary of AI Techniques}
+	\vspace{-0.25in}
 \end{table*}
 
 %\begin{figure*}[t]
@@ -567,7 +569,7 @@ $\bullet$ {\bf Expert Systems.} While expert systems support some of the propert
 
 \emph{Real-time.} Expert systems typically utilize facts, rules, and an inference engine to provide solutions to problems based on the knowledge of human experts. The inference engine uses the facts and rules to infer knowledge which can also create new facts and initiate the use of additional rules. The inference engines creates this lattice or web of information that interconnects rules and facts and changes dynamically.
 
-However, the selection of relevant rules and facts within the inference engine depends upon the problem being addressed. Some rules and facts will not apply for particular problems. Accordingly, searching the rules and facts is not optimized for a given situation and the time complexity is unbounded.
+However, the selection of relevant rules and facts within the inference engine depends upon the problem being addressed. Some rules and facts will not apply for particular problems. Accordingly, searching the rules and facts in general is not optimized for a specific problem and the time complexity --- while not strictly unbounded --- is intractable in practice~\cite{Sebesta:16}.
 
 \emph{Embedded.} Expert systems are typically used for decision support and provide guidance for human operators rather than being autonomous and implementing the advice given. This property makes expert systems not well suited for embedded environments.
 
