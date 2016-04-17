@@ -158,7 +158,7 @@ supported by Indiana Wesleyan University's Hinds Research Grant.}}
 \IEEEauthorblockA{Department of Computer Science\\
 Indiana Wesleyan University\\
 Marion, IN 46952\\
-Email: jeremy.davis11004@myemail.indwes.edu, joe.hoffert@indwes.edu, erik.vanlandingham@myemail.indwes.edu}}
+Email: jeremydavis519@gmail.com, joe.hoffert@indwes.edu, vanlandingham1138@gmail.com}}
 %\and
 %\IEEEauthorblockN{Homer Simpson}
 %\IEEEauthorblockA{Twentieth Century Fox\\
@@ -240,17 +240,17 @@ While disruptions can occur in the environment (\emph{e.g.}, substation outages 
 
 \emph{Adaptive changes should be done in a bounded amount of time.} Otherwise the adaptation that is carried out will be too late to be effective. An appropriate change that is implemented too late becomes an inappropriate change when timeliness is important. Untimely changes could worsen the status of the power grid by creating instability and initiating changes that are no longer appropriate because the overall state of the grid has changed.
 
-\emph{Adaptive changes should be made without human input.} Otherwise the changes might not occur in a timely manner. Some adaptive changes need to occur faster than humans can react (e.g., shutting down a substation before it is overloaded). In addition, human interaction can introduce human error and worsen the state of the power grid. Moreover, the size, complexity, and wide geographical deployment of the grid exacerbates the problem of human intervention.
+\emph{Adaptive changes should be made without human input.} Otherwise the changes might not occur in a timely manner. Some adaptive changes need to occur faster than humans can react (e.g., shutting down a substation before it is overloaded). In addition, human interaction can introduce human error and worsen the state of the power grid. Moreover, the size, complexity, and wide geographical deployment of the grid makes human intervention infeasible.
 
-\emph{Adaptive changes should be robust to unforeseen perturbations.} Otherwise, undesirable performance or behavior might occur because of these perturbations. Circumstances that weren't previously predicted can occur with a system as large and complex as a power grid and any adaptive change should gracefully handle these circumstances even if these circumstances have not been accounted for \emph{a priori}.
+\emph{Adaptive changes should be robust to unforeseen perturbations.} Otherwise, undesirable performance or behavior might result from these perturbations. Circumstances that weren't previously predicted can occur with a system as large and complex as a power grid and any adaptive change should gracefully handle these circumstances even if these circumstances have not been accounted for \emph{a priori}.
 
 \emph{Adaptation should incorporate unforeseen perturbations into an overall strategy.}
-Otherwise, the power grid's resiliency will be lessened if it can not learn from previous changes. So that the power grid will be more resilient, it should incorporate any unforeseen circumstances into its adaptation strategy. Once the initially unforeseen circumstances are handled the power grid should adapt to anticipate these circumstances should they arise again. Therefore, the next time these circumstances are encountered the grid can better respond.
+The power grid's resiliency will be lessened if it can not learn from previous changes. So that the power grid will be more resilient, it should incorporate any unforeseen circumstances into its adaptation strategy. Once the initially unforeseen circumstances are handled the power grid should adapt to anticipate these circumstances should they arise again. Therefore, the next time these circumstances are encountered the grid can better respond.
 %smart power grid that publishes relevant system status information to homeland security depending on the environment conditions? Higher priority for data to sent to first reponders if a malicious attach is detected?
 
 \section{Taxonomy for Adaptive DRE Systems}
 \label{taxonomy}
-This section presents the taxonomy for adaptive DRE systems. For any approach used in providing adaptation for a DRE system the following four areas should be considered.
+This section presents the taxonomy for adaptive DRE systems. For any approach used in providing adaptation for a DRE system the following areas should be considered.
 \begin{enumerate}
 \item \textbf{Distributed.} The adaptive approach used should support a distributed environment. One tactic for supporting the distributed property is to provide deterministic behavior. This behavior can then be consistently replicated on all the computational nodes or machines utilized in this system. With this approach the behavior for any one computational node is known \emph{a priori} and will be the same across all nodes.
 
@@ -258,11 +258,12 @@ This section presents the taxonomy for adaptive DRE systems. For any approach us
 % I think this sentence is a repeat: However, at a minimum, any adaptive approach must provide a bounded timeliness which allows for worst-case execution time (WCET) analysis and design.
 % Another aspect of timeliness can be even the order of the bounded or constant time. If an approach is bounded (constant) will that bounded (or constant) time be good enough for the particular situation so that adaptations are timely. Or will the decision phase take too long to be usable? I think this is a case-by-case basis and performance improvements can be made if the time is bounded/constant. If it's not then there are no assurances that all the resources in the world will be enough to meet timeliness requirements.
 
-\item \textbf{Embedded.} The adaptive approach used should support an embedded environment. Embedded computer systems are developed in such a way that the user is not consciously aware that they are interacting with a computer system. Embedded computer systems present an interface that is familiar and common for the domain of the user. For example, an embedded computer system can be used in a vending machine that dispenses drinks. The user interfaces with the machine by inserting money and making a selection by pushing buttons. The computer system decides if the appropriate money has been deposited as well as determining if the selection is valid (including checking that a normally valid selection is still available).
+\item \textbf{Embedded.} The adaptive approach used should support an embedded environment. An embedded computer system is developed in such a way that the user is not consciously aware that they are interacting with a computer system. It presents an interface that is familiar and common for the domain of the user. For example, an embedded computer system can be used in a vending machine that dispenses drinks. The user interfaces with the machine by inserting money and making a selection by pushing buttons. The computer system decides if the appropriate money has been deposited as well as determining if the selection is valid (including checking that a normally valid selection is still available).
 
-Embedded computer systems are typically constrained in the resources available (\emph{e.g.}, memory, computational power) since the system must conform to particular space and footprint requirements which limit space for the computational resources. Embedded computer systems also typically cannot rely on expert human intervention. The user interacting with the system will generally not be a computer system expert. Therefore, the computer system needs to be autonomous in its execution and decision-making.
+% Nothing in the rest of the paper references anything mentioned in this paragraph.
+%\textbf{\emph{Embedded computer systems are typically constrained in the resources available (\emph{e.g.}, memory, computational power) since the system must conform to particular space and footprint requirements which limit space for the computational resources. Embedded computer systems also typically cannot rely on expert human intervention. The user interacting with the system will generally not be a computer system expert. Therefore, the computer system needs to be autonomous in its execution and decision-making.}}
 
-\item \textbf{Robust to new inputs.} Adaptive DRE systems need to be robust in handling inputs that have not been previously encountered. A critical property for adaptive DRE systems is gracefully handling unexpected situations. The adaptive approach used should be able to provide reasonable adaptation in these cases even if the adaptation is less than ideal.
+\item \textbf{Robust to new inputs.} Adaptive DRE systems need to be robust in handling inputs that have not been previously encountered. A critical property for adaptive DRE systems is gracefully handling unexpected situations. The adaptive approach used should be able to provide reasonable output in these cases even if the output is less than ideal.
 
 \item \textbf{Autodidactic.} %Learning at run-time. Modifiable during run-time.
 The adaptive approach used should support being updated with new information as it becomes available. As the adaptive DRE system runs
@@ -273,14 +274,14 @@ configurations the adaptive approach has not encountered previously.
 The adaptive approach should handle any new information appropriately (as referenced in the previous property) but additionally should
 leverage this new information to prepare for additional new configurations. For example, supervised
 machine learning approaches should use this new information as additional training data.
-Moreover, when the learning approach is leveraging the new information as part of its training data the other relevant properties (\emph{i.e.}, distributed, real-time, and embedded) must continue to be supported.
+Moreover, when the learning approach is leveraging the new information as part of its training data the other relevant properties (\emph{i.e.}, distributed, real-time, embedded, and robust) must continue to be supported.
 
 \end{enumerate}
 
 \section{AI Approaches}
 \label{ml-approaches}
 
-This section provides a brief overview of various AI approaches considered. This section highlights distinguishing aspects of each approach.
+This section provides a brief overview of various AI approaches considered, highlighting distinguishing aspects of each approach.
 This overview is leveraged in Section~\ref{classification} where the paper
 taxonomizes the approaches based on the categories described in
 Section~\ref{taxonomy}.
@@ -493,7 +494,7 @@ An ANN is generally a  good fit for an adaptive DRE system, but it suffers from 
 
 \emph{Robust to new inputs.} Regardless of the training set, an ANN can produce output for every input set. Moreover, it interpolates between the training outputs when used on inputs outside of the training set, which can improve accuracy if the output values can be placed in a meaningful order (\emph{e.g.} low, medium, and high). In general, an ANN can be used reliably on both known and previously unencountered inputs for a classification given a set of attributes, such as the attributes that determine the communication protocol that should be used to maintain a given quality of service~\cite{Hoffert:10}.
 
-\emph{Autodidactic.} Unfortunately, an ANN does not easily learn from experience. The correct output must be known before the ANN can learn, which implies either a more accurate AI technique employed alongside the ANN, human intervention, or a problem whose solution becomes obvious in retrospect. Then the ANN must be trained on the previous data set in addition to the new information that it is to learn. This training may conceivably be done on a separate processor in order to preserve the real-time requirement for using the network, but the time required for training is unbounded. The training is deterministic, which is amenable for adaptivity in a distributed system.
+\emph{Autodidactic.} Unfortunately, an ANN does not easily learn from experience. The correct output must be known before the ANN can learn, which implies either a more accurate AI technique employed alongside the ANN, human intervention, or a problem whose solution becomes obvious in retrospect. Then the ANN must be trained on the previous data set in addition to the new information that it is to learn. This training may conceivably be done on a separate processor in order to preserve the real-time requirement for using the network, but the time required for training is unbounded. The training is, however, deterministic, which is amenable for adaptivity in a distributed system.
 
 % Jeremy's previous write-up.
 %An ANN is generally a good fit for an adaptive DRE system. It can be used reliably for classification of environmental properties to allow the system to adapt to changing conditions. [2] After training, an ANN's output is deterministic as it depends only on the input, the network's static structure, the weights that have been learned, and the neurons' activation functions. Thus, identical ANNs distributed across a DRE system will all reach the same conclusion given the same input.
@@ -513,7 +514,7 @@ The general definition of a BN offers few guarantees about its timeliness or how
 	\emph{Real-time.} Every prediction by a BN
 %After a Bayesian network is constructed, every invocation on the network for adaptive guidance
 %satisfies the timeliness requirement of a real-time system by being
-can be bounded by the number of nodes in the network, the number of possible states for each node, and the number of connections between them.
+can be bounded by the product of the number of nodes in the network, the number of possible states for each node, and the number of connections between them.
 An explicit bounded-time mathematical formula can calculate any probability in the network, using every connection and every possible state of a node no more than once.
 %The fact that the network is acyclic guarantees that no edge can be used more than once and that probabilities for each node's values do not need to be recalculated during the same invocation (\emph{i.e.}, a node cannot be a direct or indirect cause of itself, so it cannot affect its own probabilities). Some invocations might require fewer calculations because of conditional independence, but never more.
 	
@@ -575,7 +576,8 @@ However, the selection of relevant rules and facts within the inference engine d
 
 \emph{Robust to new inputs.} Expert systems do not support interpolation or extrapolation of results. Inferences are made from the facts and the rules. However, unless adaptation decisions involve specific facts and rules an expert system will not be able to provide suitable guidance. Therefore, an expert system is not robust to handling inputs not previously encountered.
 
-\emph{Autodidactic.} Since expert systems are based on facts and rules they are amenable to adding new facts and rules as they become available. Adding a rule or fact for the inference engine is straightforward (\emph{e.g.}, stating a fact for a Prolog knowledge base) and can be done in constant time. The inference engine will utilize any new fact or rule as soon as it has been added. However, as noted previously, the generation of inferences can have unbounded time complexity.
+\emph{Autodidactic.} Since expert systems are based on facts and rules they are amenable to adding new facts and rules as they become available. Adding a rule or fact for the inference engine is straightforward (\emph{e.g.}, stating a fact for a Prolog knowledge base) and can be done in constant time. The inference engine will utilize any new fact or rule as soon as it has been added. However, the addition of new rules, if the number of new rules is unbounded, leads to truly unbounded time complexity in the generation of inferences.
+%However, as noted previously, the generation of inferences can have unbounded time complexity.
 
 %Do we need to concern ourselves with the time complexity of adding a fact or rule? Or are we concerned with ease of use for the developer to incorporate new knowledge/data?
 
@@ -601,7 +603,7 @@ Random Forests can be adapted to fulfill most of the requirements of a DRE syste
 
 \emph{Embedded.} Random Forests are decision making systems capable of reaching a classification without the interaction of a human, fulfilling the requirement of embedded systems.
 
-\emph{Robust to new inputs.} The Random Forests' ability to generalize is determined by the number of trees in the forest. As the number of trees increases, the generalization increases as long as each new tree is sufficiently different from all the other trees in the forest~\cite{Ho:95}.
+\emph{Robust to new inputs.} A Random Forest's ability to generalize is determined by the number of trees in the forest. As the number of trees increases, the generalization increases as long as each new tree is sufficiently different from all the other trees in the forest~\cite{Ho:95}.
 
 \emph{Autodidactic.} For a Random Forest to incorporate new data, new classification trees of non-predetermined depth must be added to the forest ~\cite{Lin:06}. Time complexity will become unbounded without depth limitations, limitations on the number of trees in the forest, and tree pruning. If the forest is limited in either the number of trees that can be added or the depth and breadth of each individual tree (which is needed to address timeliness concerns), accuracy can be lost. Therefore, Random Forests do not address the autodidactic needs of adaptive DRE systems. 
 
@@ -619,7 +621,7 @@ $\bullet$ {\bf Support Vector Machines (SVMs).} SVMs are generally useful for ad
 
 \section{Analyzing Gaps}
 \label{gap-analysis}
-Per analysis of the AI techniques for adaptive DRE systems, no single technique addresses all five areas of concern. Additionally, there is no AI technique that sufficiently addresses the autodidactic property of adaptive DRE systems aside from Expert Systems which have several other deficiencies. Some of the techniques start to address the autodidactic property if certain constraints are applied (e.g., restricting Bayesian Networks from dynamically modifying the network topology).
+Per analysis of the AI techniques for adaptive DRE systems, no single technique fully addresses all five areas of concern. Additionally, no AI technique that is described in this paper sufficiently and necessarily addresses the autodidactic property of adaptive DRE systems aside from Expert Systems, which have several other deficiencies. Some of the techniques start to address the autodidactic property if certain constraints are applied (\emph{e.g.}, restricting Bayesian Networks from dynamically modifying the network topology).
 There are AI techniques that meet all but one of the 5 adaptive DRE properties and are therefore good starting points for further investigation. In general, additional research of AI techniques is needed to better understand the challenges and trade-offs and to address these deficiencies to fully support adaptive DRE systems.
 %\textbf{\emph{One gap we can put here is being able to handle all the requirements for adaptive DRE systems. There doesn't seem to be any approach that handles all four concerns for adaptive DRE systems. For instance, some approaches can be updated while the system is running (\emph{e.g.}, expert systems can handle adding another rule). However, these systems aren't suitable for adaptive DRE systems (in the case of expert systems, there are timeliness concerns).}}
 
